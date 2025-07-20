@@ -38,6 +38,7 @@ int select_info(struct addrinfo *res) {
         }
         // Set socket option so the port can be reused (?)
         if (setsockopt(listen_fd, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(int)) == -1) {
+            close(listen_fd);
             perror("setsockopt");
             continue;
         }
